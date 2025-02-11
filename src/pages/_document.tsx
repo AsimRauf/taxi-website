@@ -1,14 +1,15 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Script from 'next/script'
+import { getTranslations } from '@/utils/translations'
 
 export default function Document() {
+  const translations = getTranslations('nl')
   return (
-    <Html lang="en">
+    <Html>
       <Head>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet" />
         <Script
-          src="your-script-source"
           strategy="beforeInteractive"
+          src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places,geometry&language=${translations.locale}`}
         />
       </Head>
       <body>
