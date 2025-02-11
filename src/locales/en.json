@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "login": "Login",
+    "services": "Our Services",
+    "contact": "Contact",
+    "aboutUs": "About Us",
+    "service1": "Taxi Service",
+    "service2": "Business Transport"
+  },
+  "hero": {
+    "title": "Book Your Ride with Confidence",
+    "subtitle": "Professional taxi service for all your transportation needs",
+    "formTitle": "Plan Your Journey",
+    "pickup": "Pickup Location",
+    "pickupPlaceholder": "Enter pickup address",
+    "destination": "Destination",
+    "destinationPlaceholder": "Enter destination address",
+    "pickupDateTime": "Pickup Date & Time",
+    "returnTrip": "Return Trip",
+    "returnDateTime": "Return Date & Time",
+    "luggage": "I have luggage",
+    "travelers": "Number of Travelers",
+    "person": "Person",
+    "people": "People",
+    "calculate": "Calculate My Ride",
+    "returnPlaceholder": "Select return date and time"
+  },
+  "booking": {
+    "title": "Comfort Taxi Service",
+    "from": "From",
+    "to": "To",
+    "distance": "Distance",
+    "duration": "Duration",
+    "passengers": "Passengers",
+    "luggage": "Luggage",
+    "yes": "Yes",
+    "no": "No",
+    "pickupTime": "Pickup Time",
+    "returnTime": "Return Time",
+    "totalPrice": "Total Price",
+    "returnIncluded": "*Return journey included in total price",
+    "back": "Back",
+    "bookNow": "Book Now"
+  }
+}

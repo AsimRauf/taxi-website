@@ -1,0 +1,45 @@
+{
+  "nav": {
+    "login": "Inloggen",
+    "services": "Onze Diensten",
+    "contact": "Contact",
+    "aboutUs": "Over Ons",
+    "service1": "Taxi Service",
+    "service2": "Zakelijk Vervoer"
+  },
+  "hero": {
+    "title": "Boek Uw Rit met Vertrouwen",
+    "subtitle": "Professionele taxiservice voor al uw vervoersbehoeften",
+    "formTitle": "Plan Uw Reis",
+    "pickup": "Ophaallocatie",
+    "pickupPlaceholder": "Voer ophaaladres in",
+    "destination": "Bestemming",
+    "destinationPlaceholder": "Voer bestemmingsadres in",
+    "pickupDateTime": "Ophaaldatum & Tijd",
+    "returnTrip": "Retourrit",
+    "returnDateTime": "Retourdatum & Tijd",
+    "luggage": "Ik heb bagage",
+    "travelers": "Aantal Reizigers",
+    "person": "Persoon",
+    "people": "Personen",
+    "calculate": "Bereken Mijn Rit",
+    "returnPlaceholder": "Selecteer retourdatum en tijd"
+  },
+  "booking": {
+    "title": "Comfort Taxi Service",
+    "from": "Van",
+    "to": "Naar",
+    "distance": "Afstand",
+    "duration": "Duur",
+    "passengers": "Passagiers",
+    "luggage": "Bagage",
+    "yes": "Ja",
+    "no": "Nee",
+    "pickupTime": "Ophaaltijd",
+    "returnTime": "Retourtijd",
+    "totalPrice": "Totaalprijs",
+    "returnIncluded": "*Retourrit inbegrepen in totaalprijs",
+    "back": "Terug",
+    "bookNow": "Nu Boeken"
+  }
+}
