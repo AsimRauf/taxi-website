@@ -7,7 +7,7 @@ export interface NavTranslations {
     aboutUs: string;
     service1: string;
     service2: string;
-  }
+  };
   hero: {
     title: string;
     subtitle: string;
@@ -25,5 +25,22 @@ export interface NavTranslations {
     people: string;
     calculate: string;
     returnPlaceholder: string;
-  }
+  };
+  booking: {
+    title: string;
+    from: string;
+    to: string;
+    distance: string;
+    duration: string;
+    passengers: string;
+    luggage: string;
+    yes: string;
+    no: string;
+    pickupTime: string;
+    returnTime: string;
+    totalPrice: string;
+    returnIncluded: string;
+    back: string;
+    bookNow: string;
+  };
 }
