@@ -5,24 +5,30 @@
     "contact": "Contact",
     "aboutUs": "Over Ons",
     "service1": "Taxi Service",
-    "service2": "Zakelijk Vervoer"
+    "service2": "Zakelijk Vervoer",
+    "profile": "Profiel",
+    "signOut": "Uitloggen"
   },
   "hero": {
     "title": "Boek Uw Rit met Vertrouwen",
     "subtitle": "Professionele taxiservice voor al uw vervoersbehoeften",
     "formTitle": "Plan Uw Reis",
     "pickup": "Ophaallocatie",
-    "pickupPlaceholder": "Voer ophaaladres in",
+    "pickupPlaceholder": "Voer ophaallocatie in",
     "destination": "Bestemming",
-    "destinationPlaceholder": "Voer bestemmingsadres in",
+    "destinationPlaceholder": "Voer bestemming in",
+    "addStopover": "Tussenstop toevoegen",
+    "swapLocations": "Locaties omwisselen",
+    "stopover": "Tussenstop",
+    "removeStopover": "Verwijder tussenstop",
     "pickupDateTime": "Ophaaldatum & Tijd",
-    "returnTrip": "Retourrit",
     "returnDateTime": "Retourdatum & Tijd",
+    "returnTrip": "Retourrit",
     "luggage": "Ik heb bagage",
     "travelers": "Aantal Reizigers",
     "person": "Persoon",
     "people": "Personen",
-    "calculate": "Bereken Mijn Rit",
+    "calculate": "Bereken Prijs",
     "returnPlaceholder": "Selecteer retourdatum en tijd"
   },
   "booking": {
@@ -41,5 +47,25 @@
     "returnIncluded": "*Retourrit inbegrepen in totaalprijs",
     "back": "Terug",
     "bookNow": "Nu Boeken"
-  }
+  },
+  "auth": {
+    "createAccount": "Account aanmaken",
+    "fullName": "Volledige naam",
+    "nameRequired": "Naam is verplicht",
+    "emailRequired": "E-mail is verplicht",
+    "invalidEmail": "Ongeldig e-mailadres",
+    "phoneRequired": "Telefoonnummer is verplicht",
+    "invalidPhone": "Ongeldig Nederlands telefoonnummer",
+    "passwordRequired": "Wachtwoord is verplicht",
+    "passwordLength": "Wachtwoord moet minimaal 8 tekens bevatten",
+    "passwordMatch": "Wachtwoorden komen niet overeen",
+    "genericError": "Er is iets misgegaan",
+    "creating": "Account aanmaken...",
+    "create": "Account aanmaken",
+    "haveAccount": "Heb je al een account?",
+    "signin": "Inloggen",
+    "password": "Wachtwoord",
+    "phoneNumber": "Telefoonnummer",
+    "confirmPassword": "Bevestig Wachtwoord"
+  }  
 }
