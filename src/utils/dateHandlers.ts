@@ -1,6 +1,20 @@
-import { formatDate } from 'date-fns'
+import { BookingFormData } from '@/types/booking'
+import { Dispatch, SetStateAction } from 'react'
 
-export const handleDateChange = (date: any, type: 'pickup' | 'return', setFormData: any) => {
+interface DateValue {
+  year: number
+  month: number
+  day: number
+  hour: number
+  minute: number
+  second: number
+}
+
+export const handleDateChange = (
+  date: DateValue | null, 
+  type: 'pickup' | 'return',
+  setFormData: Dispatch<SetStateAction<BookingFormData>>
+) => {
     if (date) {
         const selectedDate = new Date(
             date.year,
@@ -11,7 +25,7 @@ export const handleDateChange = (date: any, type: 'pickup' | 'return', setFormDa
             date.second
         )
         
-        setFormData((prev: { pickupDate?: Date; returnDate?: Date }) => ({
+        setFormData((prev: BookingFormData) => ({
             ...prev,
             [type === 'pickup' ? 'pickupDate' : 'returnDate']: selectedDate
         }))

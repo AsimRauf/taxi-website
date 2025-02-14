@@ -6,7 +6,12 @@ const nextConfig = {
     localeDetection: false, // This will prevent automatic locale detection
   },
   images: {
-    domains: ['your-domain.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 }
 

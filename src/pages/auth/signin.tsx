@@ -35,8 +35,12 @@ export default function SignIn() {
       
       login(data.token, data.user)
       router.push('/')
-    } catch (error: any) {
-      setError(error.message)
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message)
+      } else {
+        setError('An unknown error occurred')
+      }
     } finally {
       setIsLoading(false)
     }

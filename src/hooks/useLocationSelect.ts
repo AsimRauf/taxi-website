@@ -1,14 +1,30 @@
 import { Location, BookingFormData } from '@/types/booking'
+import { NavTranslations } from '@/types/translations'
+import { SingleValue } from 'react-select'
+
+export interface SelectOption {
+    label: string
+    value: {
+        description: string
+        structured_formatting: {
+            main_text: string
+            secondary_text: string
+            place_id: string
+        }
+        place_id: string
+    }
+}
+
+
 
 export const handleLocationSelect = async (
-    selected: any,
+    selected: SingleValue<SelectOption>,
     type: 'pickup' | 'destination' | 'stopover',
     formData: BookingFormData,
     setFormData: React.Dispatch<React.SetStateAction<BookingFormData>>,
-    translations: any,
+    translations: NavTranslations,
     index?: number
-) => {
-    if (!selected) {
+) => {    if (!selected) {
         if (type === 'stopover' && typeof index === 'number') {
             const newStopovers = [...formData.stopovers]
             newStopovers[index] = null as unknown as Location
@@ -35,10 +51,14 @@ export const handleLocationSelect = async (
             })
         ])
 
-        const enrichedLocation = {
-            ...selected,
+        const enrichedLocation: Location = {
+            label: selected.value.structured_formatting.main_text,
+            description: selected.value.description,
             mainAddress: mainResult.results[0]?.formatted_address,
-            secondaryAddress: secondaryResult.results[0]?.formatted_address
+            secondaryAddress: secondaryResult.results[0]?.formatted_address,
+            value: {
+                place_id: selected.value.place_id
+            }
         }
 
         if (type === 'stopover' && typeof index === 'number') {

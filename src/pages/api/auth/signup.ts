@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     const hashedPassword = await hash(password, 12)
-    const user = await User.create({
+    await User.create({
       name,
       email,
       phoneNumber,
@@ -28,10 +28,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     res.status(201).json({ message: 'User created successfully' })
-  } catch (error: any) {
-    if (error.code === 11000) {
+  } catch (error: unknown) {
+    if ((error as { code?: number }).code === 11000) {
       return res.status(400).json({ message: 'Email or phone number already exists' })
     }
-    res.status(500).json({ message: error.message || 'Error creating user' })
+    res.status(500).json({ message: (error as Error).message || 'Error creating user' })
   }
 }

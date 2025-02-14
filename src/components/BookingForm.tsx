@@ -3,6 +3,10 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { formatDate } from 'date-fns'
 
+import { SingleValue } from 'react-select'
+import type { SelectOption } from '@/hooks/useLocationSelect'
+
+
 // Utils and hooks
 import { calculateSegmentDistances } from '@/utils/distanceCalculations'
 import { validateBookingForm } from '@/utils/bookingValidation'
@@ -19,28 +23,10 @@ import { MapPin, Plus, Minus, ArrowUpDown } from 'lucide-react'
 import { Location, BookingFormData } from '@/types/booking'
 import { NavTranslations } from '@/types/translations'
 
-interface SegmentDistance {
-    from: string
-    to: string
-    distance: string
-    duration: string
-}
-
 interface BookingFormProps {
     translations: NavTranslations
-  }
-
-interface BookingDetailsProps {
-    segments: SegmentDistance[]
-    totalDistance: string
-    hasLuggage: boolean
-    travelers: number
-    pickupDate: string
-    isReturn: boolean
-    returnDate?: string
-    translations: NavTranslations
-    onClose: () => void
 }
+
 
 export function BookingForm({ translations }: BookingFormProps) {
     const [formData, setFormData] = useState<BookingFormData>({
@@ -141,11 +127,13 @@ export function BookingForm({ translations }: BookingFormProps) {
                 <span className="block text-sm font-medium text-gray-600">From</span>
                 <LocationInput
                     value={formData.pickup}
-                    onChange={(place) => handleLocationSelect(place, 'pickup', formData, setFormData, translations)}
+                    onChange={(place: SingleValue<SelectOption>) =>
+                        handleLocationSelect(place, 'pickup', formData, setFormData, translations)}
                     placeholder={translations.hero.pickupPlaceholder}
                     translations={translations}
                     onClear={() => setFormData(prev => ({ ...prev, pickup: null }))}
                 />
+
             </div>
             <div className="flex justify-center pt-7">
                 <button

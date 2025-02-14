@@ -1,10 +1,17 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
+interface User {
+  id: string
+  email: string
+  name: string
+  phoneNumber: string
+}
+
 interface AuthContextType {
-  user: any
+  user: User | null
   token: string | null
-  login: (token: string, user: any) => void
+  login: (token: string, user: User) => void
   logout: () => void
   isLoading: boolean
 }
@@ -12,7 +19,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({} as AuthContextType)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
@@ -31,7 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     initAuth()
   }, [])
 
-  const login = (token: string, user: any) => {
+  const login = (token: string, user: User) => {
     localStorage.setItem('token', token)
     localStorage.setItem('user', JSON.stringify(user))
     setToken(token)
@@ -47,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }
 
   if (isLoading) {
-    return null // or a loading spinner
+    return null
   }
 
   return (

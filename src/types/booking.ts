@@ -1,8 +1,11 @@
 export interface Location {
     label: string
-    value: { place_id: string }
-    mainAddress?: string
-    secondaryAddress?: string
+    description: string
+    value: { 
+        place_id: string 
+    }
+    mainAddress: string
+    secondaryAddress: string
 }
 
 export interface BookingFormData {

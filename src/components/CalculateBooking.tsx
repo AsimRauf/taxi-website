@@ -1,11 +1,6 @@
-import { useState } from 'react'
-import { MapPin } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { NavTranslations } from '@/types/translations'
-import { FIXED_ROUTE_PRICES, VEHICLES } from '@/constants/fixedPrices'
 
-interface CalculateBookingProps {
-  translations: NavTranslations
-}
 
 interface BookingData {
     sourceAddress: string
@@ -19,118 +14,66 @@ interface BookingData {
     passengers: number
 }
 
-const STEPS = {
-    LUGGAGE: 0,
-    VEHICLE: 1,
-    TRAVEL_INFO: 2,
-    CONTACT: 3
+interface CalculateBookingProps {
+  translations: NavTranslations
 }
 
 export default function CalculateBooking({ translations }: CalculateBookingProps) {
-    const [currentStep, setCurrentStep] = useState(STEPS.LUGGAGE)
-    const [selectedVehicle, setSelectedVehicle] = useState('')
-    const [bookingData, setBookingData] = useState<BookingData | null>(null)
-    const [contactDetails, setContactDetails] = useState({
-        name: '',
-        email: '',
-        phone: ''
-    })
+    const [savedBooking, setSavedBooking] = useState<BookingData | null>(null)
 
-    const renderLuggageStep = () => {
-        return (
-            <div>
-                {/* Luggage selection UI */}
-            </div>
-        )
-    }
-
-    const renderVehicleStep = () => {
-        return (
-            <div className="grid md:grid-cols-2 gap-6">
-                {Object.entries(VEHICLES).map(([key, vehicle]) => (
-                    <div 
-                        key={key}
-                        className={`p-4 border rounded-lg cursor-pointer ${
-                            selectedVehicle === key ? 'border-primary' : 'border-gray-200'
-                        }`}
-                        onClick={() => setSelectedVehicle(key)}
-                    >
-                        <img src={vehicle.image} alt={vehicle.name} />
-                        <h3 className="font-bold mt-2">{vehicle.name}</h3>
-                        <p className="text-sm text-gray-600">Max {vehicle.capacity} passengers</p>
-                        <p className="text-sm">{vehicle.description}</p>
-                    </div>
-                ))}
-            </div>
-        )
-    }
-
-    const renderTravelInfo = () => {
-        return (
-            <div>
-                {/* Journey details and pricing */}
-            </div>
-        )
-    }
-
-    const renderContactForm = () => {
-        return (
-            <div>
-                {/* Contact form */}
-            </div>
-        )
-    }
-
-    const renderStepContent = () => {
-        switch(currentStep) {
-            case STEPS.LUGGAGE:
-                return renderLuggageStep()
-            case STEPS.VEHICLE:
-                return renderVehicleStep()
-            case STEPS.TRAVEL_INFO:
-                return renderTravelInfo()
-            case STEPS.CONTACT:
-                return renderContactForm()
-            default:
-                return null
+    useEffect(() => {
+        const bookingDataStr = localStorage.getItem('bookingData')
+        if (bookingDataStr) {
+            setSavedBooking(JSON.parse(bookingDataStr))
         }
+    }, [])
+
+    if (!savedBooking) {
+        return <div className="text-center p-8">{translations.hero.formTitle}</div>
     }
 
     return (
         <div className="min-h-screen bg-gradient-to-br from-primary to-primary-dark pt-24 pb-16">
-            <div className="w-[90%] md:max-w-3xl mx-auto">
-                {/* Stepper UI */}
-                <div className="flex justify-between mb-8">
-                    {Object.values(STEPS).map((step) => (
-                        <div 
-                            key={step}
-                            className={`w-1/4 text-center ${
-                                currentStep >= step ? 'text-white' : 'text-gray-400'
-                            }`}
-                        >
-                            {/* Step indicator */}
-                        </div>
-                    ))}
-                </div>
+            <div className="w-[90%] md:max-w-3xl mx-auto bg-white rounded-xl shadow-xl p-6">
+                <h2 className="text-2xl font-bold mb-6">{translations.hero.title}</h2>
+                
+                <div className="space-y-4">
+                    <div>
+                        <h3 className="font-semibold">Route</h3>
+                        <p>From: {savedBooking.sourceAddress}</p>
+                        <p>To: {savedBooking.destinationAddress}</p>
+                        {savedBooking.stopovers.length > 0 && (
+                            <div>
+                                <p className="font-medium mt-2">Stopovers:</p>
+                                <ul className="list-disc pl-5">
+                                    {savedBooking.stopovers.map((stop, index) => (
+                                        <li key={index}>{stop}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+                    </div>
 
-                <div className="bg-white rounded-xl shadow-xl p-6">
-                    {renderStepContent()}
-                    
-                    <div className="flex justify-between mt-6">
-                        <button 
-                            onClick={() => setCurrentStep(prev => prev - 1)}
-                            disabled={currentStep === 0}
-                            className="px-4 py-2 bg-gray-100 rounded-lg"
-                        >
-                            Back
-                        </button>
-                        <button 
-                            onClick={() => setCurrentStep(prev => prev + 1)}
-                            disabled={currentStep === 3}
-                            className="px-4 py-2 bg-primary text-white rounded-lg"
-                        >
-                            Next
-                        </button>
+                    <div>
+                        <h3 className="font-semibold">Distance</h3>
+                        <p>Direct: {savedBooking.directDistance}</p>
+                        {savedBooking.extraDistance !== '0 km' && (
+                            <p>Additional: {savedBooking.extraDistance}</p>
+                        )}
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold">Schedule</h3>
+                        <p>Pickup: {savedBooking.pickupDateTime}</p>
+                        {savedBooking.returnDateTime && (
+                            <p>Return: {savedBooking.returnDateTime}</p>
+                        )}
+                    </div>
+
+                    <div>
+                        <h3 className="font-semibold">Additional Details</h3>
+                        <p>Passengers: {savedBooking.passengers}</p>
+                        <p>Luggage: {savedBooking.hasLuggage ? 'Yes' : 'No'}</p>
                     </div>
                 </div>
             </div>

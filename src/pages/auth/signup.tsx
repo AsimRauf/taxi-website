@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Eye, EyeOff } from 'lucide-react'
 import { getTranslations } from '@/utils/translations'
-import { log } from 'console'
 
 export default function SignUp() {
   const router = useRouter()
@@ -82,8 +81,8 @@ export default function SignUp() {
       }
 
       router.push('/auth/signin')
-    } catch (error: any) {
-      setErrors({ submit: error.message })
+    } catch (error: unknown) {
+      setErrors({ submit: error instanceof Error ? error.message : String(error) })
     } finally {
       setIsLoading(false)
     }
@@ -99,8 +98,7 @@ export default function SignUp() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow-xl sm:rounded-lg sm:px-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
+          <form onSubmit={handleSubmit} className="space-y-6">            <div>
               <label className="block text-sm font-medium text-gray-700">
                 {translations.auth.fullName}
               </label>

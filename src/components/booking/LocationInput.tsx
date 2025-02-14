@@ -2,6 +2,24 @@ import dynamic from 'next/dynamic'
 import { createGooglePlacesConfig } from '@/config/googlePlaces'
 import { Location } from '@/types/booking'
 import { NavTranslations } from '@/types/translations'
+import { SingleValue } from 'react-select'
+
+interface GooglePlaceValue {
+  description: string
+  structured_formatting: {
+      main_text: string
+      secondary_text: string
+      place_id: string
+  }
+  place_id: string
+}
+
+
+
+interface SelectOption {
+  label: string
+  value: GooglePlaceValue
+}
 
 const GooglePlacesAutocomplete = dynamic(
   () => import('react-google-places-autocomplete'),
@@ -13,12 +31,15 @@ const GooglePlacesAutocomplete = dynamic(
 
 interface LocationInputProps {
   value: Location | null
-  onChange: (value: any) => void
+  onChange: (place: SingleValue<SelectOption>) => Promise<void> | void
   placeholder: string
   translations: NavTranslations
   onClear?: () => void
 }
 
+interface ClearIndicatorProps {
+  innerProps: React.HTMLAttributes<HTMLDivElement>
+}
 export const LocationInput = ({ 
   value, 
   onChange, 
@@ -52,7 +73,7 @@ export const LocationInput = ({
           loadingMessage: () => translations.locale === 'nl' ? "Laden..." : "Loading...",
           components: {
             DropdownIndicator: null,
-            ClearIndicator: onClear ? (props: any) => (
+            ClearIndicator: onClear ? (props: ClearIndicatorProps) => (
               <div
                 {...props.innerProps}
                 onClick={onClear}
@@ -62,7 +83,7 @@ export const LocationInput = ({
               </div>
             ) : undefined
           },
-          formatOptionLabel: (option: any) => {
+          formatOptionLabel: (option: SelectOption) => {
             const { label, value } = option
             return (
               <div>

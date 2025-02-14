@@ -1,24 +1,8 @@
-import { useState } from 'react'
 import { BookingForm } from './BookingForm'
 import { NavTranslations } from '@/types/translations'
-import { BookingDetails } from './BookingDetails'
 
 interface HeroSectionProps {
   translations: NavTranslations
-}
-
-// In HeroSection.tsx, update the interface:
-interface BookingDetailsProps {
-  segments: any[] 
-  totalDistance: string
-  totalPrice: number
-  hasLuggage: boolean
-  travelers: number
-  pickupDate: string
-  isReturn: boolean
-  returnDate?: string
-  translations: NavTranslations
-  onClose: () => void
 }
 
 export default function HeroSection({ translations }: HeroSectionProps) {

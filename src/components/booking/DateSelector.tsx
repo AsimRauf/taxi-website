@@ -1,9 +1,9 @@
 import { DatePicker } from "@heroui/react"
-import { now, getLocalTimeZone } from '@internationalized/date'
+import { now, getLocalTimeZone, ZonedDateTime } from '@internationalized/date'
 
 interface DateSelectorProps {
     label: string
-    onChange: (date: any) => void
+    onChange: (date: ZonedDateTime | null) => void
 }
 
 export function DateSelector({ label, onChange }: DateSelectorProps) {
